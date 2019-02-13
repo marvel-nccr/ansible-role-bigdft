@@ -1,0 +1,17 @@
+---
+bigdft_version: "1.8.3"
+bigdft_minor_version: "1.8"
+bigdft_src: bigdft-suite-{{ bigdft_version }}
+bigdft_src_archive: "{{ bigdft_src }}.tar.gz"
+bigdft_code_folder: "${HOME}"
+bigdft_url: "https://launchpad.net/bigdft/{{ bigdft_minor_version }}/{{ bigdft_version }}/+download/{{ bigdft_src_archive }}"
+bigdft_topdir: "{{ bigdft_code_folder }}/spred-suite"
+bigdft_executables:
+- name: bigdft
+  folder: "{{ bigdft_topdir }}/Obj"
+  plugin: bigdft.bigdft
+
+bigdft_tests:
+- h2o
+
+root_user: root

@@ -15,6 +15,7 @@
       - liblapack-dev
       - libnetcdf-dev
       - libopenbabel-dev
+      - cmake
 
 - name: Get bigdft source
   get_url:

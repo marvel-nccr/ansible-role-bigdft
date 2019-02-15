@@ -22,10 +22,8 @@
     url: "{{ bigdft_url }}"
     dest: "{{ bigdft_code_folder }}/{{ bigdft_src_archive }}"
   register: bigdft_download
-
+  
 - name: Extract bigdft source
-  become: "{{ 'yes' if ubuntu_desktop_vm_user is defined else 'no' }}"
-  become_user: "{{ ubuntu_desktop_vm_user }}"
   unarchive:
     src: "{{ bigdft_download.dest }}"
     dest: "{{ bigdft_code_folder }}"

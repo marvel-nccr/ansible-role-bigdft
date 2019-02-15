@@ -42,7 +42,7 @@
 - name: Create bigdft user
   user:
     name: bigdft
-    create_home: no
+    create_home: false
     home: "{{ bigdft_code_folder }}"
 
 - name: If on travis, give the source folder to ubuntu user

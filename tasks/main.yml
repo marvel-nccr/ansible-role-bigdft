@@ -26,7 +26,7 @@
 - name: Extract bigdft source
   become: true
   become_user: "{{ ubuntu_desktop_vm_user }}"
-  when: ubuntu_desktop_vm_user is defined
+    when: ubuntu_desktop_vm_user is defined
   unarchive:
     src: "{{ bigdft_download.dest }}"
     dest: "{{ bigdft_code_folder }}"

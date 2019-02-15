@@ -45,12 +45,11 @@
 
 - name: If on travis, give the source folder to ubuntu user
   file:
-  when: ubuntu_desktop_vm_user is defined
-  path: "{{ bigdft_topdir }}"
-  owner: bigdft
-  group: bigdft
-  mode: 01777
-  recurse: true
+    path: "{{ bigdft_topdir }}"
+    owner: bigdft
+    group: bigdft
+    mode: 01777
+    recurse: true
 
 - name: Make bigdft executables
   become: true

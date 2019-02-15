@@ -39,19 +39,29 @@
     path: "{{ bigdft_topdir }}/bigdft.modules"
     regexp: "^.*doxygen.*$"
 
-# - name: Copy rcfile
-#   template:
-#     src: rcfile-quantum-mobile.rc
-#     dest: "{{ bigdft_topdir }}/rcfiles"
+- name: Create bigdft user
+  user:
+    name: bigdft
 
+- name: If on travis, give the source folder to ubuntu user
+  file:
+  when: ubuntu_desktop_vm_user is defined
+  path: "{{ bigdft_topdir }}"
+  owner: bigdft
+  group: bigdft
+  mode: 01777
+  recurse: yes
+  
 - name: Make bigdft executables
+  become: yes
+  become_user: bigdft
   command: "../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"
   # shell: "../Installer.py build -y -a babel -f ../rcfiles/rcfile-quantum-mobile.rc -v"
   args:
     chdir: "{{ bigdft_topdir }}/build"
     creates: "{{ bigdft_topdir }}/build/install/bin/bigdft"
   register: bigdft_make
-
+  
 - import_tasks: tests.yml
 #  when: bigdft_make.changed and run_tests is defined and run_tests
 

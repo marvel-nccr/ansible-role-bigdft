@@ -22,7 +22,7 @@
     url: "{{ bigdft_url }}"
     dest: "{{ bigdft_code_folder }}/{{ bigdft_src_archive }}"
   register: bigdft_download
-  
+
 - name: Extract bigdft source
   unarchive:
     src: "{{ bigdft_download.dest }}"
@@ -50,10 +50,10 @@
   owner: bigdft
   group: bigdft
   mode: 01777
-  recurse: yes
-  
+  recurse: true
+
 - name: Make bigdft executables
-  become: yes
+  become: true
   become_user: bigdft
   command: "../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"
   # shell: "../Installer.py build -y -a babel -f ../rcfiles/rcfile-quantum-mobile.rc -v"
@@ -61,7 +61,7 @@
     chdir: "{{ bigdft_topdir }}/build"
     creates: "{{ bigdft_topdir }}/build/install/bin/bigdft"
   register: bigdft_make
-  
+
 - import_tasks: tests.yml
 #  when: bigdft_make.changed and run_tests is defined and run_tests
 

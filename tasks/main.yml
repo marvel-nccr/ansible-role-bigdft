@@ -45,12 +45,12 @@
     create_home: false
     home: "{{ bigdft_code_folder }}"
 
-- name: If on travis, give the source folder to ubuntu user
+- name: If on travis, give the source folder to bigdft user
   file:
     path: "{{ bigdft_topdir }}"
     owner: bigdft
     group: bigdft
-    mode: 01777
+    mode: 0777
     recurse: true
 
 - name: Make bigdft executables

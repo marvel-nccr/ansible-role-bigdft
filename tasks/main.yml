@@ -45,9 +45,9 @@
     create_home: false
     home: "{{ bigdft_code_folder }}"
 
-- name: If on travis, give the source folder to bigdft user
+- name: Give the source folder to bigdft user
   file:
-    path: "{{ bigdft_topdir }}"
+    path: "{{ bigdft_code_folder }}"
     owner: bigdft
     group: bigdft
     mode: 0777

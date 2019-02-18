@@ -52,7 +52,7 @@
     creates: "{{ bigdft_topdir }}/build/install/bin/bigdft"
   register: bigdft_make
 
-- debug: msg= "{{ bigdft_make.stdout }}"
+- debug: msg= "{{ bigdft_make.stderr }} {{ bigdft_make.stdout }}"
 
 - import_tasks: tests.yml
 

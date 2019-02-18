@@ -9,7 +9,6 @@ services:
 env:
   global:
     - ANSIBLE_ROLE: bigdft
-    - JHBUILD_RUN_AS_ROOT: 1
 
 matrix:
   include:

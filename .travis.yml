@@ -33,7 +33,7 @@ before_script:
   - cd marvel-nccr.$ANSIBLE_ROLE
 
 script:
-  - molecule test
+  - travis_wait 40 molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

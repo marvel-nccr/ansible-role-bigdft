@@ -16,6 +16,7 @@
       - libnetcdf-dev
       - libopenbabel-dev
       - cmake
+      - python-dev
 
 - name: Get bigdft source
   get_url:
@@ -24,9 +25,6 @@
   register: bigdft_download
 
 - name: Extract bigdft source
-  become: true
-  become_user: "{{ ubuntu_desktop_vm_user }}"
-  when: ubuntu_desktop_vm_user is defined
   unarchive:
     src: "{{ bigdft_download.dest }}"
     dest: "{{ bigdft_code_folder }}"
@@ -42,21 +40,21 @@
     path: "{{ bigdft_topdir }}/bigdft.modules"
     regexp: "^.*doxygen.*$"
 
-# - name: Copy rcfile
-#   template:
-#     src: rcfile-quantum-mobile.rc
-#     dest: "{{ bigdft_topdir }}/rcfiles"
+- name: Patch jhbuild to allow build as root. Remove it later
+  patch:
+    src: patch_jhbuild.patch
+    dest: "{{ bigdft_topdir }}/jhbuild/main.py"
 
 - name: Make bigdft executables
   command: "../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"
-  # shell: "../Installer.py build -y -a babel -f ../rcfiles/rcfile-quantum-mobile.rc -v"
   args:
     chdir: "{{ bigdft_topdir }}/build"
     creates: "{{ bigdft_topdir }}/build/install/bin/bigdft"
+  environment:
+    JHBUILD_RUN_AS_ROOT: 1
   register: bigdft_make
 
 - import_tasks: tests.yml
-#  when: bigdft_make.changed and run_tests is defined and run_tests
 
 - name: "Put a line in ~/.profile to add bigdft to the path"
   lineinfile:

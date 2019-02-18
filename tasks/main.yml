@@ -43,7 +43,7 @@
 - name: Patch jhbuild to allow build as root. Remove it later
   patch:
     src: patch_jhbuild.patch
-    dest: {{ bigdft_topdir }}/jhbuild/main.py
+    dest: "{{ bigdft_topdir }}/jhbuild/main.py"
 
 - name: Make bigdft executables
   command: "../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"

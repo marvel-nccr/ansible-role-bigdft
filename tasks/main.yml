@@ -50,7 +50,7 @@
   args:
     chdir: "{{ bigdft_topdir }}/build"
     creates: "{{ bigdft_topdir }}/build/install/bin/bigdft"
-  environment: 
+  environment:
     JHBUILD_RUN_AS_ROOT: 1
   register: bigdft_make
 

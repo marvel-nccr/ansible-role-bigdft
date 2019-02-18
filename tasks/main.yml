@@ -40,23 +40,12 @@
     path: "{{ bigdft_topdir }}/bigdft.modules"
     regexp: "^.*doxygen.*$"
 
-- name: Create bigdft user
-  user:
-    name: bigdft
-    create_home: false
-    home: "{{ bigdft_code_folder }}"
-
-- name: Give the source folder to bigdft user
-  file:
-    path: "{{ bigdft_code_folder }}"
-    owner: bigdft
-    group: bigdft
-    mode: 0777
-    recurse: true
+- name: Patch jhbuild to allow build as root. Remove it later
+  patch:
+    src: patch_jhbuild.patch
+    dest: {{ bigdft_topdir }}/jhbuild/main.py
 
 - name: Make bigdft executables
-  become: true
-  become_user: bigdft
   command: "../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"
   args:
     chdir: "{{ bigdft_topdir }}/build"

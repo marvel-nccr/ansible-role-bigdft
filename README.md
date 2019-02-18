@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/adegomme/ansible-role-bigdft.svg?branch=master)](https://travis-ci.org/adegomme/ansible-role-bigdft)
+[![Build Status](https://travis-ci.org/marvel-nccr/ansible-role-bigdft.svg?branch=master)](https://travis-ci.org/marvel-nccr/ansible-role-bigdft)
 # Ansible Role: marvel-nccr.bigdft
 
 An Ansible role that installs [BigDFT](https://bigdft.org) on Ubuntu.

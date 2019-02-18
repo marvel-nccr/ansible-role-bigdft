@@ -54,8 +54,6 @@
     JHBUILD_RUN_AS_ROOT: 1
   register: bigdft_make
 
-- debug: msg= "{{ bigdft_make.stderr }} {{ bigdft_make.stdout }}"
-
 - import_tasks: tests.yml
 
 - name: "Put a line in ~/.profile to add bigdft to the path"

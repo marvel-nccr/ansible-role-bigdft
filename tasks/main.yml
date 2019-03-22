@@ -54,7 +54,8 @@
     JHBUILD_RUN_AS_ROOT: 1
   register: bigdft_make
 
-- import_tasks: tests.yml
+- include_tasks: tests.yml
+  when: run_tests is defined and run_tests
 
 - name: "Put a line in ~/.profile to add bigdft to the path"
   lineinfile:

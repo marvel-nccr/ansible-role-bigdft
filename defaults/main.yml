@@ -11,7 +11,4 @@ bigdft_executables:
     folder: "{{ bigdft_topdir }}/Obj"
     plugin: bigdft.bigdft
 
-bigdft_tests:
-  - h2o
-
 root_user: root

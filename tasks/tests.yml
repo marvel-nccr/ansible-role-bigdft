@@ -1,6 +1,6 @@
 ---
 - name: run bigdft simple test
-  shell: "make C.check"
+  command: "make C.check"
   args:
     chdir: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic"
-  with_items: "{{ bigdft_tests }}"
+    creates: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic/C-test"

@@ -32,12 +32,6 @@
   when: bigdft_download.changed
   register: bigdft_extract
 
-- name: This is to remove problematic patches in release 1.8.3. Remove it later
-  replace:
-    path: "{{ bigdft_topdir }}/bigdft.modules"
-    regexp: "^.*doxygen.*$"
-  when: bigdft_extract.changed
-
 - name: Patch jhbuild to allow build as root. Remove it later
   patch:
     src: patch_jhbuild.patch

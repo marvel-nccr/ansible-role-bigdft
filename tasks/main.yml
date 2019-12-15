@@ -32,6 +32,12 @@
   when: bigdft_download.changed
   register: bigdft_extract
 
+- name: This is to remove problematic patches. Remove it later
+  replace:
+    path: "{{ bigdft_topdir }}/bigdft.modules"
+    regexp: "^.*doxygen.*$"
+  when: bigdft_extract.changed
+
 - name: Create build dir
   file:
     path: "{{ bigdft_topdir }}/build"

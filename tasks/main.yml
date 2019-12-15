@@ -32,12 +32,6 @@
   when: bigdft_download.changed
   register: bigdft_extract
 
-- name: Patch jhbuild to allow build as root. Remove it later
-  patch:
-    src: patch_jhbuild.patch
-    dest: "{{ bigdft_topdir }}/jhbuild/main.py"
-  when: bigdft_extract.changed
-
 - name: Create build dir
   file:
     path: "{{ bigdft_topdir }}/build"

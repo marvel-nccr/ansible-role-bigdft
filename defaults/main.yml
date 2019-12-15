@@ -2,12 +2,11 @@
 bigdft_version: "1.9.0"
 bigdft_src: bigdft-suite-{{ bigdft_version }}
 bigdft_src_archive: "{{ bigdft_src }}.tar.gz"
-bigdft_code_folder: "${HOME}"
+bigdft_code_folder: "/tmp"
+bigdft_prefix: "/usr/local"
 bigdft_url: "https://gitlab.com/l_sim/bigdft-suite/-/archive/{{ bigdft_version }}/{{ bigdft_src_archive }}"
 bigdft_topdir: "{{ bigdft_code_folder }}/bigdft-suite-{{ bigdft_version }}"
 bigdft_executables:
   - name: bigdft
-    folder: "{{ bigdft_topdir }}/Obj"
+    folder: "{{ bigdft_prefix }}/bin"
     plugin: bigdft.bigdft
-
-root_user: root

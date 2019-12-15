@@ -2,7 +2,6 @@
 # see bigdft.org for installation instructions
 - name: Install bigdft dependencies
   become: true
-  become_user: "{{ root_user }}"
   apt:
     name:
       - gfortran
@@ -17,6 +16,7 @@
       - libopenbabel-dev
       - cmake
       - python-dev
+      - autoconf
 
 - name: Get bigdft source
   get_url:
@@ -43,11 +43,19 @@
     path: "{{ bigdft_topdir }}/build"
     state: directory
 
+# necessary to install inside /usr/local
+- name: Set prefix in rcFile
+  lineinfile:
+    path: "{{ bigdft_topdir }}/rcfiles/ubuntu_MPI.rc"
+    line: "prefix = '{{ bigdft_prefix }}'"
+    state: present
+
 - name: Make bigdft executables
+  become: true
   command: "../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"
   args:
     chdir: "{{ bigdft_topdir }}/build"
-    creates: "{{ bigdft_topdir }}/build/install/bin/bigdft"
+    creates: "{{ bigdft_prefix }}/bin/bigdft"
   environment:
     JHBUILD_RUN_AS_ROOT: 1
   register: bigdft_make

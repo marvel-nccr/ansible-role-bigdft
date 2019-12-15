@@ -1,6 +1,7 @@
 ---
 - name: run bigdft simple test
   command: "make C.check"
+  become: true
   args:
     chdir: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic"
     creates: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic/C-test"

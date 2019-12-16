@@ -66,12 +66,19 @@
 - name: "Put a line in ~/.profile to add bigdft to the path"
   lineinfile:
     path: "${HOME}/.profile"
-    line: "export PATH=${PATH}:{{ bigdft_topdir }}/build/install/bin"
+    line: "export PATH=${PATH}:{{ bigdft_prefix }}/bin"
 
-- name: "Put a line in ~/.profile to add bigdft to the ld_library_path"
-  lineinfile:
-    path: "${HOME}/.profile"
-    line: "export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:{{ bigdft_topdir }}/build/install/lib"
+- name: add dynamic library path config
+  become: true
+  template:
+    src: bigdft.conf
+    dest: /etc/ld.so.conf.d/bigdft.conf
+  register: ld_conf
+
+- name: apply dynamic library path config
+  become: true
+  command: ldconfig
+  when: ld_conf.changed
 
 - include_role:
     name: release_notes
@@ -87,6 +94,6 @@
     section: "bigdft"
     option: "usage"
     value: >-
-      bigdft is compiled and installed in {{ bigdft_topdir }}/build/install.
+      bigdft is compiled and installed in {{ bigdft_prefix }}.
       simply run 'bigdft'
   when: release_notes is defined and release_notes

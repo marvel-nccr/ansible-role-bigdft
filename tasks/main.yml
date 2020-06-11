@@ -16,6 +16,9 @@
       - libopenbabel-dev
       - cmake
       - python-dev
+      - python3-dev
+      - python-pip
+      - python3-pip
       - autoconf
 
 - name: Get bigdft source
@@ -50,9 +53,14 @@
     line: "prefix = '{{ bigdft_prefix }}'"
     state: present
 
+- name: Install python six package
+  pip:
+    name: six
+    version: "1.15"
+
 - name: Make bigdft executables
   become: true
-  command: "../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"
+  command: "{{ bigdft_python_path }} ../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"
   args:
     chdir: "{{ bigdft_topdir }}/build"
     creates: "{{ bigdft_prefix }}/bin/bigdft"

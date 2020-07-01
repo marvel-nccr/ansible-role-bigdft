@@ -66,8 +66,9 @@
     PYTHON: "python3"
   register: bigdft_make
 
-- include_tasks: tests.yml
-  when: run_tests is defined and run_tests
+# temporarily disabled, due to an issue with a python script used on this test.
+#- include_tasks: tests.yml
+#  when: run_tests is defined and run_tests
 
 - name: "Put a line in ~/.profile to add bigdft to the path"
   lineinfile:

@@ -13,7 +13,6 @@
       - libblas-dev
       - liblapack-dev
       - libnetcdf-dev
-      - libopenbabel-dev
       - cmake
       - python-dev
       - python3-dev

@@ -19,24 +19,17 @@
       - autoconf
 
 - name: Get bigdft source
-  get_url:
-    url: "{{ bigdft_url }}"
-    dest: "{{ bigdft_code_folder }}/{{ bigdft_src_archive }}"
-  register: bigdft_download
-
-- name: Extract bigdft source
-  unarchive:
-    src: "{{ bigdft_download.dest }}"
-    dest: "{{ bigdft_code_folder }}"
-    remote_src: true
-  when: bigdft_download.changed
-  register: bigdft_extract
+  git:
+    repo: 'https://gitlab.com/l_sim/bigdft-suite.git'
+    dest: "{{ bigdft_code_folder }}/bigdft-suite"
+    force: yes
+  register: bigdft_downloaded
 
 - name: This is to remove problematic patches. Remove it later
   replace:
     path: "{{ bigdft_topdir }}/bigdft.modules"
     regexp: "^.*doxygen.*$"
-  when: bigdft_extract.changed
+  when: bigdft_downloaded.changed
 
 - name: Create build dir
   file:

@@ -22,7 +22,8 @@
   git:
     repo: 'https://gitlab.com/l_sim/bigdft-suite.git'
     dest: "{{ bigdft_code_folder }}/bigdft-suite"
-    force: yes
+    force: true
+    version: devel
   register: bigdft_downloaded
 
 - name: This is to remove problematic patches. Remove it later
@@ -60,7 +61,7 @@
   register: bigdft_make
 
 # temporarily disabled, due to an issue with a python script used on this test.
-#- include_tasks: tests.yml
+# - include_tasks: tests.yml
 #  when: run_tests is defined and run_tests
 
 - name: "Put a line in ~/.profile to add bigdft to the path"

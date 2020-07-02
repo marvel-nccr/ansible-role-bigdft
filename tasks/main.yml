@@ -34,9 +34,10 @@
 - name: Copy rcfile to build folder
   copy:
     src: "{{ bigdft_topdir }}/rcfiles/ubuntu_MPI.rc"
-    remote_src: yes
+    remote_src: true
     dest: "{{ bigdft_topdir }}/build/buildrc"
   register: buildrc
+  when: bigdft_downloaded.changed
 
 # necessary to install inside /usr/local
 - name: Set prefix in rcFile

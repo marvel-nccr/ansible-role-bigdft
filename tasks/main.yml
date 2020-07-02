@@ -36,6 +36,7 @@
     src: "{{ bigdft_topdir }}/rcfiles/ubuntu_MPI.rc"
     remote_src: yes
     dest: "{{ bigdft_topdir }}/build/buildrc"
+  register: buildrc
 
 # necessary to install inside /usr/local
 - name: Set prefix in rcFile
@@ -43,6 +44,7 @@
     path: "{{ bigdft_topdir }}/build/buildrc"
     line: "prefix = '{{ bigdft_prefix }}'"
     state: present
+  when: buildrc.changed
 
 - name: Install python six package
   pip:

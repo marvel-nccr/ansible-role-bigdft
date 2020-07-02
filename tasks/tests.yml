@@ -5,3 +5,5 @@
   args:
     chdir: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic"
     creates: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic/C-test"
+  environment:
+    PYTHON: "python2"

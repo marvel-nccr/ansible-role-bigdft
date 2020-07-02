@@ -26,21 +26,21 @@
     version: devel
   register: bigdft_downloaded
 
-- name: This is to remove problematic patches. Remove it later
-  replace:
-    path: "{{ bigdft_topdir }}/bigdft.modules"
-    regexp: "^.*doxygen.*$"
-  when: bigdft_downloaded.changed
-
 - name: Create build dir
   file:
     path: "{{ bigdft_topdir }}/build"
     state: directory
 
+- name: Copy rcfile to build folder
+  copy:
+    src: "{{ bigdft_topdir }}/rcfiles/ubuntu_MPI.rc"
+    remote_src: yes
+    dest: "{{ bigdft_topdir }}/build/buildrc"
+
 # necessary to install inside /usr/local
 - name: Set prefix in rcFile
   lineinfile:
-    path: "{{ bigdft_topdir }}/rcfiles/ubuntu_MPI.rc"
+    path: "{{ bigdft_topdir }}/build/buildrc"
     line: "prefix = '{{ bigdft_prefix }}'"
     state: present
 
@@ -51,7 +51,7 @@
 
 - name: Make bigdft executables
   become: true
-  command: "{{ bigdft_python_path }} ../Installer.py build -y -a babel -f ../rcfiles/ubuntu_MPI.rc -v"
+  command: "{{ bigdft_python_path }} ../Installer.py build -y -a babel -v"
   args:
     chdir: "{{ bigdft_topdir }}/build"
     creates: "{{ bigdft_prefix }}/bin/bigdft"

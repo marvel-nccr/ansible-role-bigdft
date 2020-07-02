@@ -1,9 +1,14 @@
 ---
 - name: run bigdft simple test
-  command: "make C.check"
+  command: "make C.in"
   become: true
   args:
     chdir: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic"
     creates: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic/C-test"
-  environment:
-    PYTHON: "python2"
+
+- name: run test
+  command: "mpirun --allow-run-as-root --oversubscribe --mca btl_vader_single_copy_mechanism none -np 2 bigdft"
+  become: true
+  args:
+    chdir: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic/C-test"
+    creates: "{{ bigdft_topdir }}/build/bigdft/tests/DFT/cubic/C-test/log.yaml"

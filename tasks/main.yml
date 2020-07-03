@@ -61,6 +61,7 @@
   environment:
     JHBUILD_RUN_AS_ROOT: 1
     PYTHON: "python3"
+    DEBIAN_FRONTEND: "noninteractive"
   register: bigdft_make
 
 - include_tasks: tests.yml

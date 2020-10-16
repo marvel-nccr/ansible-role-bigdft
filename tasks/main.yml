@@ -23,7 +23,7 @@
     repo: 'https://gitlab.com/l_sim/bigdft-suite.git'
     dest: "{{ bigdft_code_folder }}/bigdft-suite"
     force: true
-    version: devel
+    version: 4855f2cd
   register: bigdft_downloaded
 
 - name: Create build dir

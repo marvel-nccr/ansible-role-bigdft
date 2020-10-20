@@ -5,6 +5,8 @@
     name:
     - gfortran
     - git
+    - bzip2
+    - wget
     - openmpi-common
     - openmpi-bin
     - libopenmpi-dev

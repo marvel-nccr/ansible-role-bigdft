@@ -1,29 +1,33 @@
----
 # see bigdft.org for installation instructions
 - name: Install bigdft dependencies
   become: true
   apt:
     name:
-      - gfortran
-      - openmpi-common
-      - openmpi-bin
-      - libopenmpi-dev
-      - libblacs-mpi-dev
-      - libscalapack-mpi-dev
-      - libblas-dev
-      - liblapack-dev
-      - libnetcdf-dev
-      - cmake
-      - python3-dev
-      - python3-pip
-      - autoconf
+    - gfortran
+    - git
+    - bzip2
+    - wget
+    - openmpi-common
+    - openmpi-bin
+    - libopenmpi-dev
+    - libblacs-mpi-dev
+    - libscalapack-mpi-dev
+    - libblas-dev
+    - liblapack-dev
+    - libnetcdf-dev
+    - cmake
+    - python3-dev
+    - python3-pip
+    - autoconf
+    state: present
+    update_cache: true
 
 - name: Get bigdft source
   git:
     repo: 'https://gitlab.com/l_sim/bigdft-suite.git'
     dest: "{{ bigdft_code_folder }}/bigdft-suite"
     force: true
-    version: 4855f2cd
+    version: "{{ bigdft_version }}"
   register: bigdft_downloaded
 
 - name: Create build dir

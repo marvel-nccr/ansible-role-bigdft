@@ -1,11 +1,11 @@
-bigdft_version: "1.9.0"
-bigdft_src: bigdft-suite-{{ bigdft_version }}
-bigdft_src_archive: "{{ bigdft_src }}.tar.gz"
+bigdft_version: "4855f2cd" # "1.9.0"
 bigdft_code_folder: "/tmp"
 bigdft_prefix: "/usr/local"
 bigdft_python_path: "{{ ansible_python_interpreter | default('/usr/bin/python') }}"
-bigdft_url: "https://gitlab.com/l_sim/bigdft-suite/-/archive/{{ bigdft_version }}/{{ bigdft_src_archive }}"
 bigdft_topdir: "{{ bigdft_code_folder }}/bigdft-suite"
+# bigdft_src: bigdft-suite-{{ bigdft_version }}
+# bigdft_src_archive: "{{ bigdft_src }}.tar.gz"
+# bigdft_url: "https://gitlab.com/l_sim/bigdft-suite/-/archive/{{ bigdft_version }}/{{ bigdft_src_archive }}"
 bigdft_executables:
 - name: bigdft
   folder: "{{ bigdft_prefix }}/bin"

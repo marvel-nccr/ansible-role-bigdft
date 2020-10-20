@@ -1,22 +1,21 @@
----
 # see bigdft.org for installation instructions
 - name: Install bigdft dependencies
   become: true
   apt:
     name:
-      - gfortran
-      - openmpi-common
-      - openmpi-bin
-      - libopenmpi-dev
-      - libblacs-mpi-dev
-      - libscalapack-mpi-dev
-      - libblas-dev
-      - liblapack-dev
-      - libnetcdf-dev
-      - cmake
-      - python3-dev
-      - python3-pip
-      - autoconf
+    - gfortran
+    - openmpi-common
+    - openmpi-bin
+    - libopenmpi-dev
+    - libblacs-mpi-dev
+    - libscalapack-mpi-dev
+    - libblas-dev
+    - liblapack-dev
+    - libnetcdf-dev
+    - cmake
+    - python3-dev
+    - python3-pip
+    - autoconf
 
 - name: Get bigdft source
   git:

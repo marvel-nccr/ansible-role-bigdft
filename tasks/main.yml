@@ -69,7 +69,7 @@
   register: bigdft_make
   until: bigdft_make.rc == 0
   retries: 2
-  
+
 - include_tasks: tests.yml
   when: run_tests is defined and run_tests
 

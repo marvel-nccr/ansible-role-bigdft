@@ -29,6 +29,9 @@
     force: true
     version: "{{ bigdft_version }}"
   register: bigdft_downloaded
+  until: bigdft_downloaded is not failed
+  retries: 3
+  delay: 5
 
 - name: Create build dir
   file:
@@ -53,10 +56,12 @@
 
 - name: Install python six package
   pip:
-    name: six
-    version: "1.15"
+    executable: pip3
+    name:
+    - "setuptools>=47"
+    - "six~=1.15.0"
 
-- name: Make bigdft executables
+- name: Compile bigdft executables
   become: true
   command: "{{ bigdft_python_path }} ../bundler/jhbuild.py --no-interact --exit-on-error --conditions=+babel -f ./buildrc build spred"
   args:

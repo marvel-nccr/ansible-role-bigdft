@@ -6,6 +6,7 @@ bigdft_topdir: "{{ bigdft_code_folder }}/bigdft-suite"
 # bigdft_src: bigdft-suite-{{ bigdft_version }}
 # bigdft_src_archive: "{{ bigdft_src }}.tar.gz"
 # bigdft_url: "https://gitlab.com/l_sim/bigdft-suite/-/archive/{{ bigdft_version }}/{{ bigdft_src_archive }}"
+bigdft_test_cpus: 2
 bigdft_executables:
 - name: bigdft
   folder: "{{ bigdft_prefix }}/bin"

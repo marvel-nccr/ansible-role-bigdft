@@ -52,6 +52,13 @@
     line: "makeargs = '-j{{ bigdft_build_cpus }}'"
     state: present
 
+- name: Set CPUs to use for make ({{ bigdft_build_cpus }})
+  lineinfile:
+    path: "{{ bigdft_topdir }}/bundler/jhbuild/defaults.jhbuildrc"
+    regexp: "^makeargs"
+    line: "makeargs = '-j{{ bigdft_build_cpus }}'"
+    state: present
+
 # necessary to install inside /usr/local
 - name: Set prefix in rcFile
   lineinfile:

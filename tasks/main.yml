@@ -46,13 +46,18 @@
   register: buildrc
   when: bigdft_downloaded.changed
 
+- name: Set CPUs to use for make
+  lineinfile:
+    path: "{{ bigdft_topdir }}/build/buildrc"
+    line: "makeargs = '-j{{ bigdft_build_cpus }}'"
+    state: present
+
 # necessary to install inside /usr/local
 - name: Set prefix in rcFile
   lineinfile:
     path: "{{ bigdft_topdir }}/build/buildrc"
     line: "prefix = '{{ bigdft_prefix }}'"
     state: present
-  when: buildrc.changed
 
 - name: Install python six package
   pip:

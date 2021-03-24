@@ -11,3 +11,4 @@ bigdft_executables:
 - name: bigdft
   folder: "{{ bigdft_prefix }}/bin"
   plugin: bigdft
+  version: "{{ bigdft_version }}"

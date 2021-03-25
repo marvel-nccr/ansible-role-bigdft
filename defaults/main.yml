@@ -1,4 +1,4 @@
-bigdft_version: "4855f2cd" # "1.9.0"
+bigdft_version: "1.9.1"
 bigdft_code_folder: "/tmp"
 bigdft_prefix: "/usr/local"
 bigdft_python_path: "{{ ansible_python_interpreter | default('/usr/bin/python') }}"

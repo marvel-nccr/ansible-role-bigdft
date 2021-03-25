@@ -58,7 +58,7 @@
   pip:
     executable: pip3
     name:
-    - "setuptools>=47"
+    - "setuptools>=47{{',<51' if ansible_distribution_version == '16.04' else ''}}"  # setuptools 51 dropped support for python 3.5
     - "six~=1.15.0"
 
 - name: Compile bigdft executables
